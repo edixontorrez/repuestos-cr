@@ -1,0 +1,9 @@
+icon.svg:
+<svg xmlns="https://www.google.com/url?q=http://www.w3.org/2000/svg&source=gmail&ust=1794718082778000&sa=E" viewBox="0 0 512 512" width="512" height="512">
+<rect width="512" height="512" rx="110" fill="#0f172a"/>
+<circle cx="256" cy="256" r="205" fill="none" stroke="#f97316" stroke-width="18" stroke-dasharray="36 18"/>
+<circle cx="256" cy="256" r="168" fill="#1e293b" stroke="#334155" stroke-width="8"/>
+<text x="256" y="255" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="112" fill="#ffffff" letter-spacing="4">ETM</text>
+<rect x="136" y="290" width="240" height="44" rx="10" fill="#f97316"/>
+<text x="256" y="320" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="24" fill="#ffffff" letter-spacing="2">REPUESTOS CR</text>
+</svg>

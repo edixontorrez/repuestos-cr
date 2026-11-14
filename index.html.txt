@@ -1,0 +1,580 @@
+index.html:
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#0f172a" />
+<title>RepuestosCR PRO | Edixon José Torres Medina</title>
+<link rel="manifest" href="./manifest.json" />
+<link rel="icon" type="image/svg+xml" href="./icon.svg" />
+<style>
+:root {
+--navy: #0f172a;
+--navy-light: #1e293b;
+--orange: #f97316;
+--orange-dark: #ea580c;
+--bg: #f1f5f9;
+--card: #ffffff;
+--text: #0f172a;
+--muted: #64748b;
+--border: #e2e8f0;
+--green: #16a34a;
+--blue: #2563eb;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+body { background: var(--bg); color: var(--text); padding-bottom: 84px; }
+
+header {
+background: linear-gradient(135deg, var(--navy) 0%, #1e293b 100%);
+color: #fff;
+padding: 14px 16px;
+position: sticky;
+top: 0;
+z-index: 50;
+box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
+}
+.brand-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.brand-left { display: flex; align-items: center; gap: 10px; }
+.brand-title { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.3px; display: flex; align-items: center; gap: 6px; }
+.pro-badge { background: var(--orange); color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 6px; font-weight: 800; }
+.brand-sub { font-size: 0.72rem; color: #cbd5e1; margin-top: 2px; }
+
+.quick-actions {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+padding: 12px 14px 4px;
+}
+.action-btn {
+border: none;
+border-radius: 12px;
+padding: 12px 10px;
+font-weight: 700;
+font-size: 0.82rem;
+cursor: pointer;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+gap: 4px;
+box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+transition: transform 0.12s;
+}
+.action-btn:active { transform: scale(0.97); }
+.btn-buyer { background: var(--orange); color: #fff; }
+.btn-agency { background: var(--navy); color: #fff; border: 1px solid #334155; }
+.action-btn span.small { font-size: 0.68rem; font-weight: 500; opacity: 0.9; }
+
+.filters-box { padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; }
+.filter-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+select, input, textarea {
+width: 100%;
+padding: 10px;
+border: 1px solid var(--border);
+border-radius: 10px;
+background: #fff;
+font-size: 0.85rem;
+color: var(--text);
+}
+.cat-scroll {
+display: flex;
+gap: 6px;
+overflow-x: auto;
+padding-bottom: 4px;
+scrollbar-width: none;
+}
+.cat-scroll::-webkit-scrollbar { display: none; }
+.cat-chip {
+white-space: nowrap;
+padding: 6px 12px;
+border-radius: 20px;
+border: 1px solid var(--border);
+background: #fff;
+font-size: 0.78rem;
+font-weight: 600;
+color: var(--muted);
+cursor: pointer;
+}
+.cat-chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+.feed { padding: 4px 14px 20px; display: flex; flex-direction: column; gap: 12px; }
+.card {
+background: var(--card);
+border-radius: 14px;
+padding: 14px;
+border: 1px solid var(--border);
+box-shadow: 0 2px 8px rgba(15,23,42,0.04);
+}
+.card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.badge { font-size: 0.7rem; font-weight: 800; padding: 3px 8px; border-radius: 6px; text-transform: uppercase; }
+.badge-busco { background: #fef3c7; color: #b45309; }
+.badge-vendo { background: #dcfce7; color: #15803d; }
+.prov-tag { font-size: 0.75rem; font-weight: 700; color: var(--navy); background: #e2e8f0; padding: 3px 8px; border-radius: 6px; }
+.part-title { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+.car-info { font-size: 0.82rem; font-weight: 600; color: var(--orange-dark); margin-bottom: 6px; }
+.part-desc { font-size: 0.83rem; color: #334155; line-height: 1.4; margin-bottom: 10px; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px; }
+.seller-meta { font-size: 0.75rem; color: var(--muted); }
+.wa-btn {
+background: var(--green);
+color: #fff;
+text-decoration: none;
+padding: 8px 14px;
+border-radius: 10px;
+font-size: 0.8rem;
+font-weight: 700;
+display: inline-flex;
+align-items: center;
+gap: 5px;
+}
+
+.view { display: none; }
+.view.active { display: block; }
+.form-card { background: #fff; margin: 12px 14px; padding: 16px; border-radius: 14px; border: 1px solid var(--border); }
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 5px; color: var(--navy); }
+.sug-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.sug-chip {
+background: #f1f5f9;
+border: 1px solid #cbd5e1;
+border-radius: 8px;
+padding: 5px 9px;
+font-size: 0.75rem;
+cursor: pointer;
+color: var(--navy);
+}
+.submit-btn {
+width: 100%;
+background: var(--orange);
+color: #fff;
+border: none;
+padding: 13px;
+border-radius: 12px;
+font-size: 0.95rem;
+font-weight: 800;
+cursor: pointer;
+}
+
+.owner-banner {
+background: linear-gradient(135deg, var(--navy) 0%, #1e293b 100%);
+color: #fff;
+border-radius: 14px;
+padding: 18px;
+text-align: center;
+margin-bottom: 14px;
+}
+.agency-box {
+background: #fff7ed;
+border: 1px solid #fed7aa;
+border-radius: 12px;
+padding: 14px;
+margin-top: 12px;
+}
+
+nav.bottom-nav {
+position: fixed;
+bottom: 0;
+left: 0;
+right: 0;
+background: #fff;
+border-top: 1px solid var(--border);
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+padding: 8px 0;
+z-index: 60;
+}
+.nav-item {
+border: none;
+background: none;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 3px;
+font-size: 0.72rem;
+font-weight: 700;
+color: var(--muted);
+cursor: pointer;
+}
+.nav-item.active { color: var(--orange-dark); }
+</style>
+</head>
+<body>
+
+<header>
+<div class="brand-row">
+<div class="brand-left">
+<svg width="40" height="40" viewBox="0 0 512 512">
+<rect width="512" height="512" rx="110" fill="#1e293b" stroke="#f97316" stroke-width="22"/>
+<text x="256" y="305" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="185" fill="#ffffff">ETM</text>
+</svg>
+<div>
+<div class="brand-title">RepuestosCR <span class="pro-badge">PRO</span></div>
+<div class="brand-sub">Propiedad de Edixon José Torres Medina</div>
+</div>
+</div>
+</div>
+</header>
+
+<section id="view-home" class="view active">
+<div class="quick-actions">
+<button class="action-btn btn-buyer" onclick="goPost('BUSCO')">
+🔍 Busco / Publicar Repuesto
+<span class="small">Para conductores y compradores</span>
+</button>
+<button class="action-btn btn-agency" onclick="registerAgency()">
+🏢 Registrar Repuestera / Agencia
+<span class="small">Afiliar negocio en Costa Rica</span>
+</button>
+</div>
+
+<div class="filters-box">
+<div class="filter-grid">
+<select id="filter-type" onchange="renderFeed()">
+<option value="TODOS">Todos</option>
+<option value="BUSCO">Busco Pieza</option>
+<option value="VENDO">Vendo Pieza</option>
+</select>
+<select id="filter-prov" onchange="renderFeed()">
+<option value="TODAS">Provincia (Todas)</option>
+<option value="Alajuela">Alajuela</option>
+<option value="Heredia">Heredia</option>
+<option value="San José">San José</option>
+<option value="Cartago">Cartago</option>
+<option value="Guanacaste">Guanacaste</option>
+<option value="Puntarenas">Puntarenas</option>
+<option value="Limón">Limón</option>
+</select>
+<select id="filter-brand" onchange="renderFeed()">
+<option value="TODAS">Marca (Todas)</option>
+<option value="Toyota">Toyota</option>
+<option value="Hyundai">Hyundai</option>
+<option value="Nissan">Nissan</option>
+<option value="Suzuki">Suzuki</option>
+<option value="Renault">Renault</option>
+<option value="Mitsubishi">Mitsubishi</option>
+<option value="Honda">Honda</option>
+<option value="Chevrolet">Chevrolet</option>
+<option value="Kia">Kia</option>
+<option value="Otra">Otra Marca</option>
+</select>
+</div>
+
+<div class="cat-scroll" id="cat-bar">
+<button class="cat-chip active" onclick="setCat('TODAS', this)">Todas las piezas</button>
+<button class="cat-chip" onclick="setCat('Motor', this)">Motor</button>
+<button class="cat-chip" onclick="setCat('Frenos', this)">Frenos</button>
+<button class="cat-chip" onclick="setCat('Sensores y Eléctrico', this)">Sensores / Eléctrico</button>
+<button class="cat-chip" onclick="setCat('Carrocería', this)">Carrocería</button>
+<button class="cat-chip" onclick="setCat('Tablero e Interior', this)">Tablero / Interior</button>
+<button class="cat-chip" onclick="setCat('Suspensión', this)">Suspensión</button>
+<button class="cat-chip" onclick="setCat('Variedad / Otros', this)">Variedad / Otros</button>
+</div>
+</div>
+
+<div class="feed" id="feed-list"></div>
+</section>
+
+<section id="view-post" class="view">
+<div class="form-card">
+<h3 style="margin-bottom:12px; color:var(--navy);">Publicar Solicitud u Oferta</h3>
+<div class="form-group">
+<label>¿Qué deseas hacer?</label>
+<select id="post-type">
+<option value="BUSCO">BUSCO un repuesto (Soy comprador)</option>
+<option value="VENDO">VENDO un repuesto (Soy vendedor / repuestera)</option>
+</select>
+</div>
+<div class="form-group">
+<label>Provincia donde buscas o tienes la pieza</label>
+<select id="post-prov">
+<option value="Alajuela">Alajuela</option>
+<option value="Heredia">Heredia</option>
+<option value="San José">San José</option>
+<option value="Cartago">Cartago</option>
+<option value="Guanacaste">Guanacaste</option>
+<option value="Puntarenas">Puntarenas</option>
+<option value="Limón">Limón</option>
+</select>
+</div>
+<div class="form-group">
+<label>Marca, Modelo y Año del Vehículo</label>
+<input type="text" id="post-car" placeholder="Ej: Suzuki SX4 2009 / Renault Clio 2" />
+</div>
+<div class="form-group">
+<label>Categoría de la Pieza</label>
+<select id="post-cat" onchange="updateSuggestions()">
+<option value="Motor">Motor</option>
+<option value="Frenos">Frenos</option>
+<option value="Sensores y Eléctrico">Sensores y Eléctrico</option>
+<option value="Carrocería">Carrocería</option>
+<option value="Tablero e Interior">Tablero e Interior</option>
+<option value="Suspensión">Suspensión</option>
+<option value="Variedad / Otros">Variedad / Otros</option>
+</select>
+<div class="sug-chips" id="sug-box"></div>
+</div>
+<div class="form-group">
+<label>Nombre del Repuesto (o descríbelo con tus palabras)</label>
+<input type="text" id="post-part" placeholder="Ej: Empaque de motor, pito, palanca de cambio..." />
+</div>
+<div class="form-group">
+<label>Detalles adicionales (opcional)</label>
+<textarea id="post-desc" rows="2" placeholder="Ej: Nuevo o usado, lado izquierdo/derecho, referencia..."></textarea>
+</div>
+<div class="form-group">
+<label>Tu Nombre o Repuestera y Teléfono WhatsApp</label>
+<input type="text" id="post-user" placeholder="Ej: Juan Pérez" style="margin-bottom:6px;" />
+<input type="tel" id="post-phone" placeholder="Ej: 60106758" />
+</div>
+<button class="submit-btn" onclick="savePost()">Publicar en RepuestosCR</button>
+</div>
+</section>
+
+<section id="view-mine" class="view">
+<div class="feed" id="mine-list" style="padding-top:14px;"></div>
+</section>
+
+<section id="view-company" class="view">
+<div class="form-card">
+<div class="owner-banner">
+<div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:#f97316; font-weight:800;">Propietario y Fundador</div>
+<h2 style="margin:6px 0; font-size:1.25rem;">Edixon José Torres Medina</h2>
+<p style="font-size:0.8rem; color:#cbd5e1;">RepuestosCR PRO — Plataforma Automotriz de Costa Rica</p>
+</div>
+
+<div class="form-group">
+<label>Teléfono / WhatsApp Oficial de Administración</label>
+<input type="text" value="6010-6758" readonly />
+</div>
+<div class="form-group">
+<label>Correo Electrónico Oficial</label>
+<input type="text" value="constructora.eya2@gmail.com" readonly />
+</div>
+
+<div class="agency-box">
+<strong style="color:#9a3412; font-size:0.9rem;">🏢 Directorio de Agencias y Repuesteras</strong>
+<p style="font-size:0.8rem; color:#7c2d12; margin:6px 0 10px;">
+¿Tienes una venta de repuestos o agencia de vehículos en Costa Rica? Registra tu comercio oficial para recibir solicitudes directas de compradores en tu provincia.
+</p>
+<button class="submit-btn" style="background:var(--navy);" onclick="registerAgency()">
+Solicitar Afiliación por WhatsApp
+</button>
+</div>
+
+<p style="font-size:0.72rem; color:var(--muted); text-align:center; margin-top:16px;">
+© 2026 Edixon José Torres Medina. Todos los derechos reservados. Marca y software desarrollados para uso comercial en Costa Rica.
+</p>
+</div>
+</section>
+
+<nav class="bottom-nav">
+<button class="nav-item active" onclick="switchView('home', this)">🏠<span>Explorar</span></button>
+<button class="nav-item" onclick="switchView('post', this)">➕<span>Publicar</span></button>
+<button class="nav-item" onclick="switchView('mine', this)">📋<span>Mis Avisos</span></button>
+<button class="nav-item" onclick="switchView('company', this)">🛡️<span>Empresa</span></button>
+</nav>
+
+<script>
+const ADMIN_PHONE = "50660106758";
+const ADMIN_EMAIL = "constructora.eya2@gmail.com";
+
+const SUGGESTIONS = {
+"Motor": ["Empaque de motor", "Pistones", "Bomba de agua", "Kit de distribución", "Soporte de motor"],
+"Frenos": ["Pastillas de freno", "Discos de freno", "Cable freno de mano", "Bomba de freno"],
+"Sensores y Eléctrico": ["Sensor de oxígeno", "Sensor de cigüeñal", "Pito / Bocina", "Alternador", "Motor de arranque"],
+"Carrocería": ["Bumper delantero", "Faro / Silvín", "Espejo retrovisor", "Manija de puerta"],
+"Tablero e Interior": ["Palanca de cambio", "Freno de mano completo", "Reloj / Cluster", "Interruptor de ventanas"],
+"Suspensión": ["Amortiguadores", "Rótulas", "Terminales de dirección", "Tijoreta"],
+"Variedad / Otros": ["Manguera de radiador", "Tapa de combustible", "Escobillas", "Pieza sin nombre exacto"]
+};
+
+const DEFAULT_POSTS = [
+{
+id: 1,
+type: "BUSCO",
+prov: "Alajuela",
+brand: "Suzuki",
+car: "Suzuki SX4 2009",
+cat: "Motor",
+part: "Empaque de tapa de válvulas y bomba de agua",
+desc: "Busco repuesto nuevo o en excelente estado en zona de Alajuela centro o alrededores.",
+user: "Aviso de Ejemplo (Edixon Torres)",
+phone: "60106758",
+mine: false
+},
+{
+id: 2,
+type: "BUSCO",
+prov: "Heredia",
+brand: "Renault",
+car: "Renault Clio 2",
+cat: "Sensores y Eléctrico",
+part: "Sensor de oxígeno y pito / bocina",
+desc: "Necesito el sensor de 4 cables y el pito original o adaptable.",
+user: "Aviso de Ejemplo (Edixon Torres)",
+phone: "60106758",
+mine: false
+},
+{
+id: 3,
+type: "VENDO",
+prov: "Alajuela",
+brand: "Toyota",
+car: "Toyota Hilux / Corolla",
+cat: "Tablero e Interior",
+part: "Palanca de cambio y funda de freno de mano",
+desc: "Disponible para entrega inmediata en Alajuela. Consulte disponibilidad de otras piezas.",
+user: "Administración RepuestosCR",
+phone: "60106758",
+mine: false
+}
+];
+
+let posts = JSON.parse(localStorage.getItem("repuestos_cr_posts_v2")) || DEFAULT_POSTS;
+let currentCat = "TODAS";
+
+function switchView(viewName, btn) {
+document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+document.getElementById("view-" + viewName).classList.add("active");
+document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+if (btn) btn.classList.add("active");
+if (viewName === "mine") renderMine();
+if (viewName === "post") updateSuggestions();
+}
+
+function goPost(type) {
+document.getElementById("post-type").value = type;
+switchView("post", document.querySelectorAll(".nav-item")[1]);
+}
+
+function registerAgency() {
+const msg = encodeURIComponent("Hola Edixon Torres, quiero registrar mi Repuestera / Agencia oficialmente en la aplicación RepuestosCR PRO.");
+window.open(`https://www.google.com/url?q=https://wa.me/$%7BADMIN_PHONE%7D?text%3D$%7Bmsg%7D%60&source=gmail&ust=1794718082779000&sa=E, "_blank");
+}
+
+function setCat(cat, el) {
+currentCat = cat;
+document.querySelectorAll(".cat-chip").forEach(c => c.classList.remove("active"));
+el.classList.add("active");
+renderFeed();
+}
+
+function updateSuggestions() {
+const cat = document.getElementById("post-cat").value;
+const box = document.getElementById("sug-box");
+box.innerHTML = "";
+(SUGGESTIONS[cat] || []).forEach(item => {
+const b = document.createElement("button");
+b.type = "button";
+b.className = "sug-chip";
+b.textContent = "+ " + item;
+b.onclick = () => {
+const inp = document.getElementById("post-part");
+inp.value = inp.value ? inp.value + ", " + item : item;
+};
+box.appendChild(b);
+});
+}
+
+function savePost() {
+const type = document.getElementById("post-type").value;
+const prov = document.getElementById("post-prov").value;
+const car = document.getElementById("post-car").value.trim();
+const cat = document.getElementById("post-cat").value;
+const part = document.getElementById("post-part").value.trim();
+const desc = document.getElementById("post-desc").value.trim();
+const user = document.getElementById("post-user").value.trim() || "Usuario RepuestosCR";
+const phone = document.getElementById("post-phone").value.replace(/\D/g, "") || "60106758";
+
+if (!car || !part) {
+alert("Por favor indica al menos el vehículo y el repuesto que buscas o vendes.");
+return;
+}
+
+const brand = car.split(" ")[0] || "Otra";
+const newPost = {
+id: Date.now(),
+type, prov, brand, car, cat, part,
+desc: desc || "Sin detalles adicionales.",
+user, phone, mine: true
+};
+
+posts.unshift(newPost);
+localStorage.setItem("repuestos_cr_posts_v2", JSON.stringify(posts));
+
+document.getElementById("post-car").value = "";
+document.getElementById("post-part").value = "";
+document.getElementById("post-desc").value = "";
+
+alert("¡Aviso publicado exitosamente en RepuestosCR PRO!");
+switchView("home", document.querySelectorAll(".nav-item")[0]);
+renderFeed();
+}
+
+function createCardHTML(p, allowDelete = false) {
+const cleanPhone = p.phone.startsWith("506") ? p.phone : "506" + p.phone;
+const waText = encodeURIComponent(`Hola ${p.user}, vi tu publicación en *RepuestosCR PRO* sobre: *${p.part}* para *${p.car}* (${p.prov}).`);
+return `
+<div class="card">
+<div class="card-top">
+<span class="badge ${p.type === 'BUSCO' ? 'badge-busco' : 'badge-vendo'}">${p.type}</span>
+<span class="prov-tag">📍 ${p.prov}</span>
+</div>
+<div class="part-title">${p.part}</div>
+<div class="car-info">🚗 ${p.car} • ${https://www.google.com/url?q=http://p.cat&source=gmail&ust=1794718082780000&sa=E}</div>
+<div class="part-desc">${p.desc}</div>
+<div class="card-footer">
+<div class="seller-meta">Publicado por:<br><strong>${p.user}</strong></div>
+${allowDelete
+? `<button onclick="deletePost(${https://www.google.com/url?q=http://p.id&source=gmail&ust=1794718082780000&sa=E})" style="background:#dc2626;color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:700;cursor:pointer;">Eliminar</button>`
+: `💬 WhatsApp (https://www.google.com/url?q=https://wa.me/$%7BcleanPhone%7D?text%3D$%7BwaText%7D)%60&source=gmail&ust=1794718082780000&sa=E
+}
+</div>
+</div>
+`;
+}
+
+function renderFeed() {
+const t = document.getElementById("filter-type").value;
+const pr = document.getElementById("filter-prov").value;
+const br = document.getElementById("filter-brand").value;
+
+const filtered = posts.filter(p => {
+if (t !== "TODOS" && p.type !== t) return false;
+if (pr !== "TODAS" && p.prov !== pr) return false;
+if (br !== "TODAS" && !p.car.toLowerCase().includes(br.toLowerCase())) return false;
+if (currentCat !== "TODAS" && https://www.google.com/url?q=http://p.cat&source=gmail&ust=1794718082780000&sa=E !== currentCat) return false;
+return true;
+});
+
+const list = document.getElementById("feed-list");
+list.innerHTML = filtered.length
+? filtered.map(p => createCardHTML(p, false)).join("")
+: `<div class="card" style="text-align:center;color:var(--muted);">No hay avisos con ese filtro todavía. ¡Sé el primero en publicar!</div>`;
+}
+
+function renderMine() {
+const mine = posts.filter(p => p.mine);
+const list = document.getElementById("mine-list");
+list.innerHTML = mine.length
+? mine.map(p => createCardHTML(p, true)).join("")
+: `<div class="card" style="text-align:center;color:var(--muted);">Aún no has creado publicaciones propias desde este dispositivo.</div>`;
+}
+
+function deletePost(id) {
+posts = posts.filter(p => https://www.google.com/url?q=http://p.id&source=gmail&ust=1794718082780000&sa=E !== id);
+localStorage.setItem("repuestos_cr_posts_v2", JSON.stringify(posts));
+renderMine();
+renderFeed();
+}
+
+if ("serviceWorker" in navigator) {
+navigator.serviceWorker.register("./sw.js").catch(() => {});
+}
+
+renderFeed();
+</script>
+</body>
+</html>
